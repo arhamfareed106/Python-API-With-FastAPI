@@ -2,7 +2,7 @@ import re
 from urllib import response
 import uuid
 from fastapi import FastAPI
-from pydantic import BaseModel  # Fixed typo: "pydentic" -> "pydantic"
+from pydantic import BaseModel 
 from typing import List, Optional
 from uuid import UUID, uuid4
 
@@ -21,9 +21,13 @@ def create_task(task:Task):
     task.id = uuid4()
     tasks.append(task)
     return task
-@app.get("/")  
+@app.get("/tasks/", response_model=List[Task])  
 def read_tasks():
-    return {"hello": "world"}
+    return tasks
+
+
+
+
 
 if __name__ == "__main__":
     import uvicorn
